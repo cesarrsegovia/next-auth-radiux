@@ -26,5 +26,5 @@ function SigninForm() {
     </Flex>
   );
 }
-//seguir arreglando el formulario
+//
 export default SigninForm;
