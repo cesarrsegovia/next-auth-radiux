@@ -5,7 +5,14 @@ import { useForm, Controller } from "react-hook-form";
 
 function SigninForm() {
 
-    const { control, handleSubmit, formState: {errors} } = useForm();
+    const { control, handleSubmit, formState: {errors} } = useForm(
+        {
+            values: {
+            email: '',
+            password: ''
+        }
+        }
+    );
 
     const onSubmit = handleSubmit(data => {
         console.log(data);
@@ -21,8 +28,11 @@ function SigninForm() {
             <Controller
                 name="email"
                 control={control}
-                rules={{ required: true }}
-                render={(field) => {
+                rules={{ required: {
+                    value: true,
+                    message: "Email is required"
+                } }}
+                render={({field}) => {
                     return(
                         <TextField.Root type="email" placeholder="email@domain.com" {...field} />
                     )
@@ -30,26 +40,33 @@ function SigninForm() {
             />
         </TextField.Root>
 
-        {errors.email && <Text color="red">Email is required</Text>}
+        {errors.email && (<Text color="red" className="text-xs">{errors.email.message}</Text>)}
 
         <label htmlFor="password">Password</label>
-        <TextField.Root >
+        <TextField.Root>
             <TextField.Slot >
                 <LockClosedIcon height="16" width="16"/>
             </TextField.Slot>
             <Controller
                 name="password"
                 control={control}
-                rules={{ required: true }}
-                render={(field) => {
+                rules={{ required: {
+                    value: true,
+                    message: "Password is required"
+                },
+                minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters"
+                }}}
+                render={({field}) => {
                     return(
                         <TextField.Root type="password" placeholder="*******" {...field} />
                     )
                 }}
             />
         </TextField.Root>
-        {errors.password && <Text color="red">Password is required</Text>}
-        <Button>
+        {errors.password && (<Text color="red" className="text-xs">{errors.password.message}</Text>)}
+        <Button type="submit" mt="4">
             Sign In
         </Button>
     </Flex>
