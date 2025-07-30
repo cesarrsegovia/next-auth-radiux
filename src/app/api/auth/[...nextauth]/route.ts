@@ -15,5 +15,5 @@ const handler = NextAuth({
         })
     ]
 });
-// This is the NextAuth handler for authentication
+// 
 export { handler as GET, handler as POST };
