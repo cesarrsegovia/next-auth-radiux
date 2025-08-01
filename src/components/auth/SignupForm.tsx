@@ -12,7 +12,7 @@ function SignupForm() {
             password: ''
         }
     })
-//adsassad
+
     const onSubmit = handleSubmit(data => {
         console.log(data);
     });
