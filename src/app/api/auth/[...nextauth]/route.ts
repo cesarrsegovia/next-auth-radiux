@@ -13,7 +13,10 @@ const handler = NextAuth({
                 return null
             }
         })
-    ]
+    ],
+    pages: {
+        signIn: "/auth/login"
+    }
 });
 // This is the NextAuth handler for authentication
 export { handler as GET, handler as POST };
