@@ -12,7 +12,7 @@ function SignupForm() {
             password: ''
         }
     })
-    //asda  
+    // Define the type for the form data
     const onSubmit = handleSubmit(data => {
         console.log(data);
     });
