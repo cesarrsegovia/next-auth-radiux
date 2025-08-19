@@ -12,7 +12,7 @@ function SignupForm() {
             password: ''
         }
     })
-    // onSubmit function
+    // 
     const onSubmit = handleSubmit(data => {
         console.log(data);
     });
