@@ -1,6 +1,6 @@
 import { Heading, Link, Flex, Container } from '@radix-ui/themes'
 import NextLink from 'next/link'
-
+//asdas
 function Navbar() {
   return (
     <nav className='bg-zinc-950 py-4'>
@@ -8,7 +8,7 @@ function Navbar() {
             <Flex justify="between" align="center">
                 <NextLink href="/" passHref>
                     <Heading>RadixNext</Heading>
-                </NextLink>
+                </NextLink> 
                     <ul className='flex gap-x-2'>
                         <li>
                             <Link asChild>
