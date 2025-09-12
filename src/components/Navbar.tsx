@@ -1,3 +1,4 @@
+"use client";
 import { Heading, Link, Flex, Container } from '@radix-ui/themes'
 import NextLink from 'next/link'
 //asdas

@@ -86,7 +86,7 @@ function SignupForm() {
                     )}}
             />
         </TextField.Root>
-        <Button type="submit" mt="4">
+        <Button type="submit" color="blue">
             Sign Up
         </Button>
     </Flex>
