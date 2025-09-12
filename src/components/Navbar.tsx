@@ -1,8 +1,12 @@
 "use client";
 import { Heading, Link, Flex, Container } from '@radix-ui/themes'
 import NextLink from 'next/link'
-//asdas
+import { useSession } from 'next-auth/react';
+
 function Navbar() {
+
+    const { data: session } = useSession();
+
   return (
     <nav className='bg-zinc-950 py-4'>
         <Container>
