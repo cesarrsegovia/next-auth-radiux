@@ -5,7 +5,6 @@ import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import Navbar from "@/components/Navbar";
 import ContextProvider from '@context/GlobalContext';
-//arreglar 
 
 
 const geistSans = Geist({
