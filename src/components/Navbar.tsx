@@ -1,5 +1,6 @@
 "use client";
-import { Heading, Link, Flex, Container } from '@radix-ui/themes'
+import { Heading, Link, Flex, Container, DropdownMenu, Button } from '@radix-ui/themes'
+import { CaretDownIcon } from '@radix-ui/react-icons';
 import NextLink from 'next/link'
 import { useSession } from 'next-auth/react';
 
@@ -35,6 +36,24 @@ function Navbar() {
                                     Dashboard
                                 </NextLink>
                             </Link>
+                        </li>
+                        <li>
+                            <DropdownMenu.Root>
+                                <DropdownMenu.Trigger>
+                                    <Button variant="soft">
+                                        {session?.user?.name}
+                                        <DropdownMenu.TriggerIcon />
+                                    </Button>
+                                </DropdownMenu.Trigger>
+                                <DropdownMenu.Content>
+                                    <DropdownMenu.Item>My Profile</DropdownMenu.Item>
+                                    <DropdownMenu.Item>Settings</DropdownMenu.Item>
+                                    <DropdownMenu.Separator />
+                                    <DropdownMenu.Item color="red">
+                                        Logout
+                                    </DropdownMenu.Item>
+                                </DropdownMenu.Content>
+                            </DropdownMenu.Root>
                         </li>
                     </ul>
             </Flex>
