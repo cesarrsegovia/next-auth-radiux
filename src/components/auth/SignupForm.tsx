@@ -29,8 +29,8 @@ function SignupForm() {
                 email: res.data.email,
                 password: data.password,
             })
-            if (!result.ok) {
-                console.log(result.error)
+            if (!result?.ok) {
+                console.log(result?.error)
                 return;
             }
             router.push('/dashboard');
