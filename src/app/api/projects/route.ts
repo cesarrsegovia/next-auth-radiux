@@ -13,6 +13,5 @@ export async function POST(request: Request) {
     const newProject = await prisma.project.create({
         data
     })
-    //asddasd
     return NextResponse.json(newProject, { status: 201 });
 }
