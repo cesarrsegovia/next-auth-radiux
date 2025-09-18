@@ -2,8 +2,13 @@
 import { Button, Container, TextArea, TextField, Flex, Card, Heading } from "@radix-ui/themes"
 import { useForm, Controller } from "react-hook-form"
 import axios from "axios";
+import { useRouter, useParams } from "next/navigation";
+import { TrashIcon } from "@radix-ui/react-icons";
 
 function TaskNewPage() {
+
+    const router = useRouter();
+    const params = useParams();
 
     const {control, handleSubmit} = useForm({
         values:{
@@ -14,8 +19,15 @@ function TaskNewPage() {
 
     const onSubmit = handleSubmit(async(data) => {
         console.log(data)
-        const res = await axios.post('/api/projects', data)
-        console.log(res)
+        if(params.projectId){
+            const res = await axios.post('/api/projects', data)
+            if(res.status === 201){
+                router.push('/dashboard')
+                router.refresh(); //refresca la pagina para que se vea el nuevo proyecto -- borra el cache y vuelve a cargar la pagina
+        }else{
+            console.log("actualizando")
+        }
+        }
     })
 
   return (
@@ -23,8 +35,8 @@ function TaskNewPage() {
         <Container size="1" height="100%" className="p-3 md:p-0">
             <Flex className="h-screen w-full items-center">
                 <Card className="w-full p-7">
-                    <Heading>Crear proyecto</Heading>
                     <form className="flex flex-col gap-y-2" onSubmit={onSubmit}>
+                        <Heading>{params.projectId ? "Editar proyecto" : "Nuevo Proyecto"}</Heading>
                         <label>Titulo del proyecto</label>
                         <Controller 
                             name="title"
@@ -42,8 +54,17 @@ function TaskNewPage() {
                             }}
                         />
 
-                        <Button>Crear tarea</Button>
+                        <Button>{params.projectId ? "Editar Proyecto" : "Crear Proyecto"}</Button>
                     </form>
+                    <div className="flex justify-end my-4">{
+                        params.projectId && (
+                            <Button color="red">
+                                <TrashIcon/>
+                                Eliminar Proyecto
+                            </Button>
+                        )
+                    }
+                    </div>
                 </Card>
             </Flex>
         </Container>

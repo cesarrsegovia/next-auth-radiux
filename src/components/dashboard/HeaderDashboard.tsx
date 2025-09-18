@@ -7,7 +7,7 @@ function HeaderDashboard() {
     const router = useRouter();
 
   return (
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center mb-4">
                 <Heading>Proyectos</Heading>
                 <Button onClick={()=> router.push('/dashboard/projects/new')}>Agragar proyecto</Button>
             </div>
