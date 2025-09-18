@@ -1,19 +1,17 @@
 "use client"
-import { Button, Container, Heading } from "@radix-ui/themes";
+import { Button, Heading } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 
-function DashboardPage(){
+function HeaderDashboard() {
 
     const router = useRouter();
 
-    return(
-        <Container className="mt-10">
-            <div className="flex justify-between">
+  return (
+        <div className="flex justify-between">
                 <Heading>Proyectos</Heading>
                 <Button onClick={()=> router.push('/dashboard/projects/new')}>Agragar proyecto</Button>
             </div>
-        </Container>
-    )
+  )
 }
 
-export default DashboardPage;
+export default HeaderDashboard
