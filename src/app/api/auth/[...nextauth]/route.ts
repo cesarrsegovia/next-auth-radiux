@@ -31,8 +31,19 @@ export const authOptions: AuthOptions = {
     ],
     callbacks:{
         async jwt({token, user, account, profile}){
+            
+            if(user){
+                token.id = user.id;
+            }
+            console.log({token})
 
             return token;
+        },
+        async session({session, token, user}){
+            if(token){
+                session.id = token.sub;
+            }
+            return session;
         }
     },
     pages: {
