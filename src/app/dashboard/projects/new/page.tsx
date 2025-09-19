@@ -73,4 +73,4 @@ function TaskNewPage() {
 }
 
 export default TaskNewPage
-//asdsdasd
+//agregar validaciones con react hook form
