@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form"
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
 function TaskNewPage() {
 
@@ -30,9 +31,14 @@ function TaskNewPage() {
         }
     })
 
-    const handleDelete = (projectId: string) => {
+    const handleDelete = async (projectId: string) => {
         console.log(projectId)
-        axios.delete()
+        const res = await axios.delete(`/api/projects/${projectId}`)
+            if(res.status === 200){
+                toast.success("Proyecto eliminado correctamente")
+            }
+        router.push('/dashboard')
+        router.refresh();
     }
 
   return (
