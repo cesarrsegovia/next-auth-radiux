@@ -8,7 +8,7 @@ import { TrashIcon } from "@radix-ui/react-icons";
 function TaskNewPage() {
 
     const router = useRouter();
-    const params = useParams();
+    const params = useParams() as {projectId: string};
 
     const {control, handleSubmit} = useForm({
         values:{
@@ -29,6 +29,11 @@ function TaskNewPage() {
         }
         }
     })
+
+    const handleDelete = (projectId: string) => {
+        console.log(projectId)
+        axios.delete()
+    }
 
   return (
     <div>
@@ -58,7 +63,7 @@ function TaskNewPage() {
                     </form>
                     <div className="flex justify-end my-4">{
                         params.projectId && (
-                            <Button color="red">
+                            <Button color="red" onClick={()=> handleDelete(params.projectId as string)}>
                                 <TrashIcon/>
                                 Eliminar Proyecto
                             </Button>
