@@ -19,7 +19,7 @@ export const authOptions: AuthOptions = {
 
                 const validPassword = await bcrypt.compare(password, userFound.password);
 
-                if (validPassword) throw new Error("invalid credentials");
+                if (!validPassword) throw new Error("invalid credentials");
 
                 return {
                     id: userFound.id + "",
@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
         })
     ],
     callbacks:{
-        async jwt({token, user, account, profile}){
+        async jwt({token, user}){
             
             if(user){
                 token.id = user.id;
@@ -39,7 +39,7 @@ export const authOptions: AuthOptions = {
 
             return token;
         },
-        async session({session, token, user}){
+        async session({session, token}){
             if(token){
                 session.user.id = token.sub as string;
             }
@@ -52,5 +52,4 @@ export const authOptions: AuthOptions = {
 }
 
 const handler = NextAuth(authOptions);
-// This is the NextAuth handler for authentication
 export { handler as GET, handler as POST };

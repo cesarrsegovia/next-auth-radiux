@@ -5,28 +5,33 @@ import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 function TaskNewPage() {
 
-    const router = useRouter();
-    const params = useParams() as {projectId: string};
-
-    const {control, handleSubmit} = useForm({
+    const {control, handleSubmit, setValue} = useForm({
         values:{
             title: '',
             description: ''
         }
     });
 
+    const router = useRouter();
+    const params = useParams() as {projectId: string};
+
     const onSubmit = handleSubmit(async(data) => {
         console.log(data)
-        if(params.projectId){
+        if(!params.projectId){
             const res = await axios.post('/api/projects', data)
             if(res.status === 201){
                 router.push('/dashboard')
                 router.refresh(); //refresca la pagina para que se vea el nuevo proyecto -- borra el cache y vuelve a cargar la pagina
         }else{
-            console.log("actualizando")
+            const res = await axios.put(`/api/projects/${params.projectId}`, data)
+            if(res.status === 200){
+                router.push('/dashboard')
+                router.refresh(); 
+            }
         }
         }
     })
@@ -40,6 +45,16 @@ function TaskNewPage() {
         router.push('/dashboard')
         router.refresh();
     }
+
+    useEffect(()=> {
+        if(params.projectId){
+            axios.get(`/api/projects/${params.projectId}`)
+            .then(res => {
+                setValue('title', res.data.title)
+                setValue('description', res.data.description)
+            })
+        }
+    },[])
 
   return (
     <div>
@@ -69,7 +84,7 @@ function TaskNewPage() {
                     </form>
                     <div className="flex justify-end my-4">{
                         params.projectId && (
-                            <Button color="red" onClick={()=> handleDelete(params.projectId as string)}>
+                            <Button color="red" onClick={()=> handleDelete(params.projectId)}>
                                 <TrashIcon/>
                                 Eliminar Proyecto
                             </Button>
@@ -84,4 +99,3 @@ function TaskNewPage() {
 }
 
 export default TaskNewPage
-//agregar validaciones con react hook form
