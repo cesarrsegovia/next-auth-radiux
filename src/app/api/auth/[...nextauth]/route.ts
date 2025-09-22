@@ -35,11 +35,10 @@ export const authOptions: AuthOptions = {
             if(user){
                 token.id = user.id;
             }
-            console.log({token})
 
             return token;
         },
-        async session({session, token}){
+        async session({session, user, token}){
             if(token){
                 session.user.id = token.sub as string;
             }

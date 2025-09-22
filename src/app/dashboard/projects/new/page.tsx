@@ -19,22 +19,25 @@ function TaskNewPage() {
     const router = useRouter();
     const params = useParams() as {projectId: string};
 
-    const onSubmit = handleSubmit(async(data) => {
-        console.log(data)
-        if(!params.projectId){
-            const res = await axios.post('/api/projects', data)
-            if(res.status === 201){
-                router.push('/dashboard')
-                router.refresh(); //refresca la pagina para que se vea el nuevo proyecto -- borra el cache y vuelve a cargar la pagina
-        }else{
-            const res = await axios.put(`/api/projects/${params.projectId}`, data)
-            if(res.status === 200){
-                router.push('/dashboard')
-                router.refresh(); 
-            }
-        }
-        }
-    })
+    const onSubmit = handleSubmit(async (data) => {
+  console.log("📦 Data enviada:", data);
+  console.log("🆔 projectId:", params.projectId);
+
+  if (!params.projectId) {
+    const res = await axios.post("/api/projects", data);
+    if (res.status === 201) {
+      router.push("/dashboard");
+      router.refresh();
+    }
+  } else {
+    const res = await axios.put(`/api/projects/${params.projectId}`, data);
+    console.log("📡 Respuesta PUT:", res.data); // 👈 log respuesta
+    if (res.status === 200) {
+      router.push("/dashboard");
+      router.refresh();
+    }
+  }
+});
 
     const handleDelete = async (projectId: string) => {
         console.log(projectId)
@@ -48,8 +51,8 @@ function TaskNewPage() {
 
     useEffect(()=> {
         if(params.projectId){
-            axios.get(`/api/projects/${params.projectId}`)
-            .then(res => {
+            axios.get(`/api/projects/${params.projectId}`).then((res) => {
+                console.log(res);
                 setValue('title', res.data.title)
                 setValue('description', res.data.description)
             })

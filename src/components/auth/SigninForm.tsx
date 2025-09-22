@@ -36,10 +36,6 @@ function SigninForm() {
     <form onSubmit={onSubmit}>
         <Flex direction="column" gap="2">
         <label htmlFor="email">Email</label>
-        <TextField.Root>
-            <TextField.Slot>
-                <EnvelopeClosedIcon height="16" width="16"/>
-            </TextField.Slot>
             <Controller
                 name="email"
                 control={control}
@@ -49,19 +45,18 @@ function SigninForm() {
                 } }}
                 render={({field}) => {
                     return(
-                        <TextField.Root type="email" placeholder="email@domain.com" {...field} />
+                        <TextField.Root type="email" placeholder="email@domain.com" {...field}>
+                            <TextField.Slot >
+                                <EnvelopeClosedIcon height="16" width="16"/>
+                            </TextField.Slot>
+                        </TextField.Root>
                     )
                 }}
             />
-        </TextField.Root>
 
         {errors.email && (<Text color="red" className="text-xs">{errors.email.message}</Text>)}
 
         <label htmlFor="password">Password</label>
-        <TextField.Root>
-            <TextField.Slot >
-                <LockClosedIcon height="16" width="16"/>
-            </TextField.Slot>
             <Controller
                 name="password"
                 control={control}
@@ -75,11 +70,14 @@ function SigninForm() {
                 }}}
                 render={({field}) => {
                     return(
-                        <TextField.Root type="password" placeholder="*******" {...field} />
+                        <TextField.Root type="password" placeholder="*******" {...field}>
+                            <TextField.Slot >
+                                <LockClosedIcon height="16" width="16"/>
+                            </TextField.Slot>
+                        </TextField.Root>
                     )
                 }}
             />
-        </TextField.Root>
         {errors.password && (<Text color="red" className="text-xs">{errors.password.message}</Text>)}
         <Button type="submit" mt="4">
             Sign In
