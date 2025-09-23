@@ -21,31 +21,42 @@ export async function GET(
   return NextResponse.json(project);
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params; // 👈 esperar params
 
-    try {
-        const projectDeleted = await prisma.project.delete({
-            where: {
-                id: parseInt(params.id)
-            }
+  try {
+    const projectDeleted = await prisma.project.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
 
-        })
-        return NextResponse.json(projectDeleted, { status: 200 });
-    } catch (error) {
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            if (error.code === 'P2025') {
-                return NextResponse.json({ message: "Project not found" }, { status: 404 });
-            }
-        }
-        return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    return NextResponse.json(projectDeleted, { status: 200 });
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2025") {
+        return NextResponse.json(
+          { message: "Project not found" },
+          { status: 404 }
+        );
+      }
     }
+
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function PUT(
   request: Request,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params; // 👈 esperar params
+  const { id } = await context.params; 
   const data = await request.json();
 
   try {

@@ -20,8 +20,8 @@ async function HomePage(){
   return (
     <Container className="px-5 md:px-0">
       <header className="my-4 bgs-slate-900 p-10 rounded-md">
-        <h1 className="text-7xl my-10">NextAuth Radix</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet repellendus inventore iste tempore error, quasi totam itaque ipsa quae cupiditate facilis at ea dicta magni minus voluptatem, optio, voluptate molestiae.</p>
+        <h1 className="text-7xl my-10">Gestión de proyectos</h1>
+        <p>Sistema para crear, editar y eliminar proyectos.</p>
       </header>
       <div className="mt-5">
         <Link href="/auth/login" className="text-white bg-blue-500 px-2 py-1 rounded-md">Ingresar</Link>

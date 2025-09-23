@@ -31,7 +31,7 @@ function TaskNewPage() {
     }
   } else {
     const res = await axios.put(`/api/projects/${params.projectId}`, data);
-    console.log("📡 Respuesta PUT:", res.data); // 👈 log respuesta
+    console.log("📡 Respuesta PUT:", res.data); 
     if (res.status === 200) {
       router.push("/dashboard");
       router.refresh();

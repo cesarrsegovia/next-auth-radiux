@@ -35,7 +35,7 @@ function SigninForm() {
   return (
     <form onSubmit={onSubmit}>
         <Flex direction="column" gap="2">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email:</label>
             <Controller
                 name="email"
                 control={control}
@@ -56,7 +56,7 @@ function SigninForm() {
 
         {errors.email && (<Text color="red" className="text-xs">{errors.email.message}</Text>)}
 
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Password:</label>
             <Controller
                 name="password"
                 control={control}
@@ -86,5 +86,4 @@ function SigninForm() {
     </form>
   );
 }
-//seguir arreglando el formulario
 export default SigninForm;
